@@ -1,0 +1,6 @@
+{
+  "name": "Freckles Constellations",
+  "description": "Discover the celestial map hidden on your skin. Upload or capture a photo of your face, and let the cosmos trace a glowing constellation from your freckles, complete with custom astrological charts and downloadable posters.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,133 @@
+@import "tailwindcss";
+
+@layer utilities {
+  @keyframes sweep {
+    0% {
+      top: 0%;
+      opacity: 0.1;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      top: 100%;
+      opacity: 0.1;
+    }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      transform: scale(1);
+      filter: drop-shadow(0 0 2px rgba(34, 211, 238, 0.4));
+      opacity: 0.7;
+    }
+    50% {
+      transform: scale(1.3);
+      filter: drop-shadow(0 0 10px rgba(34, 211, 238, 0.8));
+      opacity: 1;
+    }
+  }
+
+  @keyframes orbit-rotate-clockwise {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes orbit-rotate-counter {
+    from {
+      transform: rotate(360deg);
+    }
+    to {
+      transform: rotate(0deg);
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+
+  .animate-sweep {
+    animation: sweep 4s linear infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  .animate-spin-slow {
+    animation: orbit-rotate-clockwise 24s linear infinite;
+  }
+
+  .animate-spin-slow-reverse {
+    animation: orbit-rotate-counter 30s linear infinite;
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes liquid-prism {
+    0% {
+      background-position: 0% 20%;
+      filter: hue-rotate(0deg);
+    }
+    50% {
+      background-position: 100% 80%;
+      filter: hue-rotate(180deg);
+    }
+    100% {
+      background-position: 0% 20%;
+      filter: hue-rotate(360deg);
+    }
+  }
+
+  @keyframes glass-shine {
+    0% {
+      transform: translateX(-150%) skewX(-25deg);
+    }
+    100% {
+      transform: translateX(250%) skewX(-25deg);
+    }
+  }
+
+  .animate-liquid-prism {
+    background-size: 350% 350%;
+    animation: liquid-prism 14s ease-in-out infinite;
+  }
+
+  .animate-glass-shine {
+    animation: glass-shine 3.5s ease-in-out infinite;
+  }
+}
+
+/* Custom scrollbars for a clean dark sci-fi aesthetic */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050508;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #222230;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #34344e;
+}
+

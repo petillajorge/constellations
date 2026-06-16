@@ -1,0 +1,61 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Global Safety Net (Default Deny)
+    match /{document=**} {
+      allow read, write: if false;
+    }
+    
+    // Global Security Helpers
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+    
+    function incoming() {
+      return request.resource.data;
+    }
+    
+    function existing() {
+      return resource.data;
+    }
+
+    // Entity validation
+    function isValidConstellation(data) {
+      return data.keys().hasAll(['id', 'constellationName', 'starNodes', 'userId'])
+        && data.id is string && data.id.size() <= 128
+        && data.constellationName is string && data.constellationName.size() <= 200
+        && data.userId is string && data.userId.size() <= 128
+        && data.userId == request.auth.uid;
+    }
+
+    match /constellations/{constellationId} {
+      allow get: if isSignedIn() 
+        && existing().userId == request.auth.uid 
+        && isValidId(constellationId);
+
+      allow list: if isSignedIn() 
+        && resource.data.userId == request.auth.uid;
+      
+      allow create: if isSignedIn() 
+        && isValidId(constellationId) 
+        && isValidConstellation(incoming())
+        && incoming().userId == request.auth.uid;
+        
+      allow update: if isSignedIn() 
+        && isValidId(constellationId) 
+        && isValidConstellation(incoming())
+        && incoming().userId == request.auth.uid
+        && existing().userId == request.auth.uid
+        && incoming().userId == existing().userId;
+        
+      allow delete: if isSignedIn() 
+        && isValidId(constellationId)
+        && existing().userId == request.auth.uid;
+    }
+  }
+}

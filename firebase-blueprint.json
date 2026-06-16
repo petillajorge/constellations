@@ -1,0 +1,71 @@
+{
+  "entities": {
+    "Constellation": {
+      "title": "Constellation",
+      "description": "A custom user-defined freckle constellation and reading",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the constellation document"
+        },
+        "constellationName": {
+          "type": "string",
+          "description": "User custom name or generated name of the constellation"
+        },
+        "constellationType": {
+          "type": "string",
+          "description": "Type classification or visual shape representation of the constellation"
+        },
+        "element": {
+          "type": "string",
+          "description": "Governing elemental power, e.g., Aether, Nebula, Stardust"
+        },
+        "celestialReading": {
+          "type": "string",
+          "description": "Astro-poetic descriptive reading of the mapped pattern"
+        },
+        "significanceDetail": {
+          "type": "object",
+          "description": "Calculated details outlining personality, destiny, and cosmic rhythm"
+        },
+        "starNodes": {
+          "type": "array",
+          "description": "A list of mapped active stars with coordinate details and individual significance"
+        },
+        "connections": {
+          "type": "array",
+          "description": "Interconnecting vector lines matching starNode ids"
+        },
+        "userName": {
+          "type": "string",
+          "description": "Name of the person mapped"
+        },
+        "starStyle": {
+          "type": "string",
+          "description": "Custom color/element style of the star nodes",
+          "enum": ["neon", "golden", "classic", "emerald", "supernova", "cosmic"]
+        },
+        "userId": {
+          "type": "string",
+          "description": "The unique Firebase Auth User ID of the owner who saved the constellation"
+        },
+        "date": {
+          "type": "string",
+          "description": "Date of creation or save operation"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "The exact creation server timestamp of the record"
+        }
+      },
+      "required": ["id", "constellationName", "starNodes", "userId"]
+    }
+  },
+  "firestore": {
+    "/constellations/{constellationId}": {
+      "schema": "Constellation",
+      "description": "User created custom or generated facial constellations"
+    }
+  }
+}
